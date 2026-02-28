@@ -1,95 +1,281 @@
-# HRM_Test
+# HRM Test Project
 
-This project is a simple Human Resource Management (HRM) system built with:
-
-- Node.js + Express (Backend)
-- HTML + Vanilla JavaScript (Frontend)
-- In-memory data storage (no database)
+A simple HR Management system including Backend API and Frontend UI.
 
 ---
 
-How to Run Backend
+# 📁 Project Structure
 
-Install dependencies:
+```
+HRM_Test/
+│
+├── backend/
+│   ├── package.json
+│   └── src/
+│
+├── frontend/
+│   ├── index.html
+│   └── script.js
+│
+└── README.md
+```
 
+---
+
+# 🚀 How to Run Backend
+
+## 1. Navigate to backend folder
+
+```bash
+cd backend
+```
+
+## 2. Install dependencies
+
+```bash
 npm install
+```
 
-Start the server:
+## 3. Start server
 
+```bash
 npm start
+```
 
-If successful, the server will run at:
+Server will run at:
 
+```
 http://localhost:5000
+```
 
-Note: Data is stored in memory. Restarting the server will reset all data.
+---
 
-How to Open Frontend
+# 🌐 How to Open Frontend
 
-After starting the backend, open the file:
+1. Navigate to `frontend` folder
+2. Open:
 
+```
 index.html
+```
 
 You can:
+- Double click `index.html`
+- OR use Live Server extension in VS Code
 
-Double click the file
+Frontend will connect to:
 
-Or use VSCode Live Server
+```
+http://localhost:5500
+```
 
-Make sure the backend is running before using the frontend.
+---
 
-Example API Usage
-Get All Employees
+# 📡 Example API Usage
 
-Endpoint:
+---
 
+## 🔹 Get All Employees
+
+### Endpoint
+
+```
 GET /employees
+```
 
-Example:
+### Example
 
-curl http://localhost:5000/employees
+```
+GET http://localhost:5000/employees
+```
 
-Example response:
+### Example using fetch
 
-{
-"success": true,
-"data": [
-{
-"id": 1,
-"name": "John Doe",
-"department": "IT",
-"leaveBalance": 12
-}
-]
-}
+```javascript
+fetch("http://localhost:5000/employees")
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+```
+---
 
-Create Employee
+## 🔹 Get Employee By ID
 
-Endpoint:
+### Endpoint
 
+```
+GET /employees/:id
+```
+
+### Example
+
+```
+GET http://localhost:5000/employees/123
+```
+
+---
+
+## 🔹 Create Employee
+
+### Endpoint
+
+```
 POST /employees
+```
 
-Request body:
+### Example
 
+```
+POST http://localhost:5000/employees
+```
+
+### Request Body Example
+
+```json
 {
-"name": "Jane Smith",
-"department": "HR",
-"leaveBalance": 10
+  "name": "Ngô Công Huân",
+  "department": "IT",
+  "leaveBalance": 10
 }
+```
 
-Example:
+### Example using fetch
 
-curl -X POST http://localhost:5000/employees
- -H "Content-Type: application/json" -d '{"name":"Jane Smith","department":"HR","leaveBalance":10}'
+```javascript
+fetch("http://localhost:5000/employees", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    name: "Ngô Công Huân",
+    department: "IT",
+    leaveBalance: 10
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(err => console.error(err));
+```
 
-Example response:
+---
 
+## 🔹 Delete Employee
+
+### Endpoint
+
+```
+DELETE /employees/:id
+```
+
+### Example
+
+```
+DELETE http://localhost:5000/employees/123
+```
+
+---
+
+## 🔹 Get All Leave Requests
+
+### Endpoint
+
+```
+GET /leave
+```
+
+### Example
+
+```
+GET http://localhost:5000/leave
+```
+
+### Example using fetch
+
+```javascript
+fetch("http://localhost:5000/leave")
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+```
+
+---
+
+## 🔹 Create Leave Request
+
+### Endpoint
+
+```
+POST /leave
+```
+
+### Example
+
+```
+POST http://localhost:5000/leave
+```
+
+### Request Body
+
+```json
 {
-"success": true,
-"data": {
-"id": 2,
-"name": "Jane Smith",
-"department": "HR",
-"leaveBalance": 10
+  "employeeId": "123",
+  "startDate": "2026-03-01",
+  "endDate": "2026-03-02",
+  "reason": "Personal leave"
 }
-}
+```
+
+### Example using fetch
+
+```javascript
+fetch("http://localhost:5000/leave", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    employeeId: "123",
+    startDate: "2026-03-01",
+    endDate: "2026-03-02",
+    reason: "Personal leave"
+  })
+})
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(err => console.error(err));
+```
+
+---
+
+## 🔹 Approve Leave Request
+
+### Endpoint
+
+```
+PATCH /leave/:id/approve
+```
+
+### Example
+
+```
+PATCH http://localhost:5000/leave/987654321/approve
+```
+---
+
+
+# 🛠 Tech Stack
+
+- Node.js
+- Express.js
+- HTML
+- CSS
+- Vanilla JavaScript
+
+---
+
+# 📌 Notes
+
+- Make sure backend is running before opening frontend.
+- If port 5000 is busy, change it in backend config.
+- Ensure CORS is enabled in backend if needed.
