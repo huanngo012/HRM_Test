@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>HRM System</h1>
+
+      <h2>Add Employee</h2>
+      <custom-form endpoint="/employees" table-id="employeeTable">
+        <form id="employeeForm">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <input
+            type="text"
+            id="department"
+            name="department"
+            placeholder="Department"
+            required
+          />
+          <input
+            type="number"
+            id="leaveBalance"
+            name="leaveBalance"
+            placeholder="Leave Balance"
+            required
+          />
+          <button type="submit">Add Employee</button>
+        </form>
+      </custom-form>
+
+      <custom-table endpoint="/employees">
+        <button class="button">View All Employees</button>
+
+        <div class="table-wrapper">
+          <table class="hidden" id="employeeTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Leave Balance</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </custom-table>
+
+      <h2>Create Leave Request</h2>
+      <custom-form endpoint="/leave" table-id="leaveTable">
+        <form id="leaveForm">
+          <input
+            type="number"
+            id="employeeId"
+            name="employeeId"
+            placeholder="Employee ID"
+            required
+          />
+          <input type="date" id="startDate" name="startDate" required />
+          <input type="date" id="endDate" name="endDate" required />
+          <input
+            type="text"
+            id="reason"
+            name="reason"
+            placeholder="Reason"
+            required
+          />
+          <button type="submit">Create Leave</button>
+        </form>
+      </custom-form>
+      <custom-table endpoint="/leave">
+        <button class="button">View All Leave Requests</button>
+
+        <div class="table-wrapper">
+          <table class="hidden" id="leaveTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Employee ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+                <th>Approve</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </custom-table>
+    </div>
+  </body>
+  <script src="./script.js"></script>
+</html>
